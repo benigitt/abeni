@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.alaadcin.user">
+
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- <permission android:name="android.permission.INTERNET" /> -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.FLAG_GRANT_READ_URI_PERMISSION" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- Required for new Book for some else feature -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--
+<uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    android:preserveLegacyExternalStorage="true"
+    -->
+    <permission
+        android:name="com.alaadcin.user.googlemapsv2.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="true" />
+
+    <uses-permission
+        android:name="com.sonix.user.googlemapsv2.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:name="com.general.files.MyApp"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:resizeableActivity="false"
+        android:supportsRtl="true"
+        android:theme="@style/AppCompatTheme"
+        tools:replace="android:allowBackup">
+        <activity android:name="com.alaadcin.user.SearchCategoryActivity"></activity>
+        <activity
+            android:name="com.alaadcin.user.RideDeliveryActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".deliverAll.checkAddView" />
+        <activity android:name="com.alaadcin.user.deliverAll.SearchStoreForGenie" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity android:name="com.alaadcin.user.MenuSettingActivity" />
+        <activity android:name="com.alaadcin.user.ProfilePaymentActivity" />
+        <activity
+            android:name="com.alaadcin.user.UberXHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.alaadcin.user.MyProfileNewActivity" />
+        <activity
+            android:name="com.alaadcin.user.DonationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.PrescriptionHistoryImagesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.PrescriptionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.ProviderInfoActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name="com.general.files.SinchService"
+            android:exported="true" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_android_geo_api_key" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <receiver
+            android:name="com.general.files.AlarmReceiver"
+            android:enabled="false">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
+            <!-- </intent-filter> -->
+        </receiver>
+
+        <service android:name="com.alaadcin.user.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <!--
+ <service
+            android:name="com.general.files.MyBackGroundService"
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="Service Alert"
+            android:persistent="true" />
+        -->
+        <!--
+   <receiver
+            android:name=".StartServiceReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.REBOOT" />
+                <action android:name="com.sonix.user.StartServiceReceiver" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.REBOOT" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.REBOOT" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.REBOOT" />
+            </intent-filter>
+        </receiver>
+        -->
+        <activity
+            android:name="com.twitter.sdk.android.core.identity.OAuthActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.LauncherActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.alaadcin.user.AppLoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/noAnimTheme" />
+        <activity
+            android:name="com.alaadcin.user.SelectCountryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.VerifyFbProfileActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@style/FBtheme"
+            tools:replace="android:theme" />
+        <activity
+            android:name="com.alaadcin.user.SearchPickupLocationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.FareEstimateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.MyProfileActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.StaticPageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.ContactUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.HelpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.QuestionAnswerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.HistoryDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.App.Base" />
+        <activity
+            android:name="com.alaadcin.user.RatingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.CardPaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.EmergencyContactActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.ConfirmEmergencyTapActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.EnterDeliveryDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.MyWalletActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.MyWalletHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.InviteFriendsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.VerifyInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.UberXSelectServiceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.UberXActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.OnGoingTripsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.OnGoingTripDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.AppLoignRegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.AccountverificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.SupportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.FareBreakDownActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.PrefranceActivity"
+            android:screenOrientation="portrait" />
+
+        <receiver
+            android:name="com.alaadcin.user.FirebaseDataReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.alaadcin.user.ChatActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.alaadcin.user.SearchLocationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.ListAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.AddAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.ScheduleDateSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.UfxOrderDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.UfxPaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.BookingSummaryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.MaintenanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.Help_MainCategory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.Help_SubCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.Help_DetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.RentalInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.RentalDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.braintreepayments.api.BraintreeBrowserSwitchActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="${applicationId}.braintree" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.alaadcin.user.VerifyCardTokenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="co.omise.android.ui.CreditCardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/OmiseSDKTheme" />
+        <activity
+            android:name="com.xendit.XenditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.cropper.CropImageActivity"
+            android:screenOrientation="portrait" /> <!-- Multi delivery_v2 Screens -->
+        <activity
+            android:name="com.alaadcin.user.CommonDeliveryTypeSelectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.EnterMultiDeliveryDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.MultiDeliverySecondPhaseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.MultiDeliveryThirdPhaseActivity"
+            android:screenOrientation="portrait" /> <!-- Deliver all -->
+        <activity
+            android:name="com.alaadcin.user.deliverAll.FoodDeliveryHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.RestaurantAllDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.SearchFoodActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.RestaurantsSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.SearchRestaurantListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.AddBasketActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.CheckOutActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.EditCartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.PaymentCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.ServiceHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.ViewCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.OrderPlaceConfirmActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.ActiveOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.TrackOrderActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.OrderDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.FoodRatingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.RestaurantAllDetailsNewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.deliverAll.SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="io.card.payment.CardIOActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.CouponActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.BusinessProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.BusinessSetupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.SelectOrganizationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.OrganizationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.MyBusinessProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.BusinessSelectPaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.IncomingCallScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.CallScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.NotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.NotificationDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.QuickPaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.livechatinc.inappchat.ChatWindowActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.UberxFilterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.MoreInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.UberxCartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.CarWashBookingDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.MoreServiceInfoActivity"
+            android:screenOrientation="portrait" /> <!-- Book for Some Else Activities -->
+        <activity
+            android:name="com.alaadcin.user.BookSomeOneElsePickContactActivity"
+            android:screenOrientation="portrait" /> <!-- FavDriver Activities -->
+        <activity
+            android:name="com.alaadcin.user.FavouriteDriverActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.BookingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.ViewMultiDeliveryDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.alaadcin.user.UserPrefrenceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".deliverAll.GenieDeliveryHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".deliverAll.FindStoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".deliverAll.BuyAnythingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.general.files.SafetyDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name="com.general.files.CovidDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" /> <!-- Verify Charges -->
+        <activity
+            android:name="com.alaadcin.user.AdditionalChargeActivity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>
